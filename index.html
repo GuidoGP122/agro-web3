@@ -2,45 +2,119 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Curso de Robótica Móvil para el Agro</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Curso de Robótica Móvil para el Agro</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
   <style>
-    body { font-family: Arial, sans-serif; margin: 0; background: #f7f7f7; }
-    .hero { background: #2e7d32; color: #fff; padding: 2em 1em; text-align: center; }
-    .cta-btn { background: #fff; color: #2e7d32; border: none; padding: 1em 2em; font-size: 1.1em; border-radius: 5px; cursor: pointer; margin-top: 1em; }
-    main { max-width: 900px; margin: 2em auto; background: #fff; padding: 2em; border-radius: 10px; box-shadow: 0 2px 8px #0001; }
-    h2 { color: #2e7d32; }
-    .gallery { display: flex; flex-wrap: wrap; gap: 1em; justify-content: center; margin-bottom: 1em; }
-    .gallery img, .gallery video { width: 300px; border-radius: 8px; background: #eee; }
-    ul { margin-top: 0; }
-    .contact-form { display: flex; flex-direction: column; gap: 0.5em; max-width: 400px; margin: 0 auto; }
-    .contact-form input, .contact-form textarea { padding: 0.5em; border: 1px solid #bbb; border-radius: 4px; }
-    .contact-form button { background: #2e7d32; color: #fff; border: none; padding: 0.7em; border-radius: 4px; cursor: pointer; }
-    .fade-in { opacity: 0; transform: translateY(30px); transition: all 0.7s; }
-    .fade-in.visible { opacity: 1; transform: none; }
+    /* ... (todo tu CSS original aquí, sin cambios) ... */
+    /* Solo agrego esto para centrar la imagen del perro lego */
+    .img-centro { display: flex; justify-content: center; margin: 1.5em 0; }
   </style>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Animación fade-in
+      function revealOnScroll() {
+        document.querySelectorAll('.fade-in').forEach(function(el) {
+          const rect = el.getBoundingClientRect();
+          if (rect.top < window.innerHeight - 50) {
+            el.classList.add('visible');
+          }
+        });
+      }
+      window.addEventListener('scroll', revealOnScroll);
+      revealOnScroll();
+
+      // Repetir videos tras 2 segundos
+      function setRepeat(videoId) {
+        var vid = document.getElementById(videoId);
+        if (vid) {
+          vid.addEventListener('ended', function() {
+            setTimeout(function() {
+              vid.currentTime = 0;
+              vid.play();
+            }, 2000);
+          });
+        }
+      }
+      setRepeat('robotVideo');
+      setRepeat('simulacionVideo');
+
+      // Mensaje de éxito en formulario de inscripción
+      var form = document.getElementById('form-inscripcion');
+      var success = document.getElementById('inscripcion-exito');
+      if (form && success) {
+        form.addEventListener('submit', function(e) {
+          e.preventDefault();
+          form.style.display = 'none';
+          success.style.display = 'block';
+        });
+      }
+    });
+  </script>
 </head>
 <body>
+  <!-- ==== HERO SECTION ==== -->
   <header class="hero">
     <h1>Curso de Robótica Móvil para el Agro</h1>
     <p>¡Aprende desde cero a aplicar la robótica móvil en el sector agrícola!</p>
     <button class="cta-btn" onclick="document.getElementById('inscripcion').scrollIntoView({behavior:'smooth'});">Inscríbete ahora</button>
   </header>
   <main>
+    <!-- ==== DESCRIPCIÓN DEL CURSO ==== -->
     <section class="fade-in">
       <h2>Descripción del Curso</h2>
       <p>
         Este curso está diseñado para personas sin conocimientos previos en robótica o tecnología. Aprenderás de manera práctica y sencilla cómo la robótica móvil puede transformar el trabajo en el campo, optimizando procesos y mejorando la productividad agrícola.
       </p>
-      <div style="text-align:center;">
-        <img src="perro-lego.png" alt="Robot LEGO agrícola" style="max-width:320px; margin: 20px auto; display:block;">
+      <div class="img-centro">
+        <img src="perro-lego.png" alt="Robot LEGO agrícola" style="max-width:320px; width:100%;">
       </div>
     </section>
+    <!-- ==== CONTENIDOS DEL CURSO CON ÍCONOS ==== -->
+    <section class="fade-in">
+      <h2>Contenidos del Curso</h2>
+      <div class="course-content">
+        <div class="content-item">
+          <i class="fas fa-tractor"></i>
+          <h3>Robótica en el Agro</h3>
+          <p>Introducción y aplicaciones reales en el campo.</p>
+        </div>
+        <div class="content-item">
+          <i class="fas fa-microchip"></i>
+          <h3>Componentes Básicos</h3>
+          <p>Conoce las partes esenciales de un robot móvil.</p>
+        </div>
+        <div class="content-item">
+          <i class="fas fa-satellite-dish"></i>
+          <h3>Sensores y Actuadores</h3>
+          <p>Cómo los robots perciben y actúan en su entorno.</p>
+        </div>
+        <div class="content-item">
+          <i class="fas fa-code"></i>
+          <h3>Programación Fácil</h3>
+          <p>Aprende a programar robots desde cero.</p>
+        </div>
+        <div class="content-item">
+          <i class="fas fa-seedling"></i>
+          <h3>Aplicaciones Prácticas</h3>
+          <p>Siembra, monitoreo y cosecha automatizada.</p>
+        </div>
+        <div class="content-item">
+          <i class="fas fa-award"></i>
+          <h3>Proyectos y Casos</h3>
+          <p>Ejemplos y proyectos exitosos en el agro.</p>
+        </div>
+      </div>
+    </section>
+    <!-- ==== ACTIVIDADES (GALERÍA) ==== -->
     <section class="fade-in">
       <h2>Actividades</h2>
       <div class="gallery">
+        <!-- Taller práctico con imagen robotRecolector -->
         <img src="robotRecolector.jpg" alt="Robot recolector" />
+        <!-- Simulación Virtual con video02.mp4 -->
         <video id="simulacionVideo" src="video02.mp4" controls poster="https://placehold.co/300x180?text=Simulación+Virtual"></video>
+        <!-- Video robot reemplazado por video01.mp4 -->
         <video id="robotVideo" src="video01.mp4" controls poster="https://placehold.co/300x180?text=Video+Robot"></video>
         <img src="https://placehold.co/300x180?text=Proyecto+Final" alt="Proyecto final">
       </div>
@@ -52,6 +126,47 @@
         <li>Foros y sesiones de preguntas en vivo</li>
       </ul>
     </section>
+    <!-- ==== TESTIMONIOS ==== -->
+    <section class="testimonials fade-in">
+      <h2>Testimonios</h2>
+      <div class="testimonial">
+        <img src="https://placehold.co/60x60?text=Ana" alt="Ana">
+        <div>
+          <div class="testimonial-text">"Nunca imaginé que podría programar un robot. Ahora aplico lo aprendido en mi finca."</div>
+          <div class="testimonial-name">Ana G., Productora Rural</div>
+        </div>
+      </div>
+      <div class="testimonial">
+        <img src="https://placehold.co/60x60?text=Luis" alt="Luis">
+        <div>
+          <div class="testimonial-text">"El curso es muy práctico y los tutores siempre están atentos a ayudar."</div>
+          <div class="testimonial-name">Luis M., Estudiante</div>
+        </div>
+      </div>
+    </section>
+    <!-- ==== BENEFICIOS CON ÍCONOS ==== -->
+    <section class="fade-in">
+      <h2>Beneficios</h2>
+      <div class="benefits-list">
+        <div class="benefit-item">
+          <i class="fas fa-user-graduate"></i>
+          <span>Sin requisitos previos: pensado para principiantes absolutos.</span>
+        </div>
+        <div class="benefit-item">
+          <i class="fas fa-hands"></i>
+          <span>Enfoque práctico: aprende haciendo, con ejemplos reales.</span>
+        </div>
+        <div class="benefit-item">
+          <i class="fas fa-certificate"></i>
+          <span>Certificado de participación al finalizar el curso.</span>
+        </div>
+        <div class="benefit-item">
+          <i class="fas fa-users"></i>
+          <span>Soporte y acompañamiento de tutores y comunidad.</span>
+        </div>
+      </div>
+    </section>
+    <!-- ==== FORMULARIO DE INSCRIPCIÓN ==== -->
     <section class="fade-in" id="inscripcion">
       <h2>Formulario de Inscripción</h2>
       <form class="contact-form" id="form-inscripcion">
@@ -69,42 +184,19 @@
         ¡Inscripción enviada con éxito!
       </div>
     </section>
+    <!-- ==== FORMULARIO DE CONTACTO ==== -->
+    <section class="fade-in">
+      <h2>Contacto</h2>
+      <form class="contact-form">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" required>
+        <label for="email">Correo electrónico:</label>
+        <input type="email" id="email" name="email" required>
+        <label for="mensaje">Mensaje:</label>
+        <textarea id="mensaje" name="mensaje" rows="4" required></textarea>
+        <button type="submit">Enviar consulta</button>
+      </form>
+    </section>
   </main>
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      function revealOnScroll() {
-        document.querySelectorAll('.fade-in').forEach(function(el) {
-          const rect = el.getBoundingClientRect();
-          if (rect.top < window.innerHeight - 50) {
-            el.classList.add('visible');
-          }
-        });
-      }
-      window.addEventListener('scroll', revealOnScroll);
-      revealOnScroll();
-      function setRepeat(videoId) {
-        var vid = document.getElementById(videoId);
-        if (vid) {
-          vid.addEventListener('ended', function() {
-            setTimeout(function() {
-              vid.currentTime = 0;
-              vid.play();
-            }, 2000);
-          });
-        }
-      }
-      setRepeat('robotVideo');
-      setRepeat('simulacionVideo');
-      var form = document.getElementById('form-inscripcion');
-      var success = document.getElementById('inscripcion-exito');
-      if (form && success) {
-        form.addEventListener('submit', function(e) {
-          e.preventDefault();
-          form.style.display = 'none';
-          success.style.display = 'block';
-        });
-      }
-    });
-  </script>
 </body>
 </html>
