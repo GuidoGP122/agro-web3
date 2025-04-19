@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Curso de Robótica Móvil para el Agro</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; background: #f7f7f7; }
+    .hero { background: #2e7d32; color: #fff; padding: 2em 1em; text-align: center; }
+    .cta-btn { background: #fff; color: #2e7d32; border: none; padding: 1em 2em; font-size: 1.1em; border-radius: 5px; cursor: pointer; margin-top: 1em; }
+    main { max-width: 900px; margin: 2em auto; background: #fff; padding: 2em; border-radius: 10px; box-shadow: 0 2px 8px #0001; }
+    h2 { color: #2e7d32; }
+    .gallery { display: flex; flex-wrap: wrap; gap: 1em; justify-content: center; margin-bottom: 1em; }
+    .gallery img, .gallery video { width: 300px; border-radius: 8px; background: #eee; }
+    ul { margin-top: 0; }
+    .contact-form { display: flex; flex-direction: column; gap: 0.5em; max-width: 400px; margin: 0 auto; }
+    .contact-form input, .contact-form textarea { padding: 0.5em; border: 1px solid #bbb; border-radius: 4px; }
+    .contact-form button { background: #2e7d32; color: #fff; border: none; padding: 0.7em; border-radius: 4px; cursor: pointer; }
+    .fade-in { opacity: 0; transform: translateY(30px); transition: all 0.7s; }
+    .fade-in.visible { opacity: 1; transform: none; }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <h1>Curso de Robótica Móvil para el Agro</h1>
+    <p>¡Aprende desde cero a aplicar la robótica móvil en el sector agrícola!</p>
+    <button class="cta-btn" onclick="document.getElementById('inscripcion').scrollIntoView({behavior:'smooth'});">Inscríbete ahora</button>
+  </header>
+  <main>
+    <section class="fade-in">
+      <h2>Descripción del Curso</h2>
+      <p>
+        Este curso está diseñado para personas sin conocimientos previos en robótica o tecnología. Aprenderás de manera práctica y sencilla cómo la robótica móvil puede transformar el trabajo en el campo, optimizando procesos y mejorando la productividad agrícola.
+      </p>
+      <div style="text-align:center;">
+        <img src="perro-lego.png" alt="Robot LEGO agrícola" style="max-width:320px; margin: 20px auto; display:block;">
+      </div>
+    </section>
+    <section class="fade-in">
+      <h2>Actividades</h2>
+      <div class="gallery">
+        <img src="robotRecolector.jpg" alt="Robot recolector" />
+        <video id="simulacionVideo" src="video02.mp4" controls poster="https://placehold.co/300x180?text=Simulación+Virtual"></video>
+        <video id="robotVideo" src="video01.mp4" controls poster="https://placehold.co/300x180?text=Video+Robot"></video>
+        <img src="https://placehold.co/300x180?text=Proyecto+Final" alt="Proyecto final">
+      </div>
+      <ul>
+        <li>Clases teóricas y demostraciones en video</li>
+        <li>Talleres prácticos con kits de robótica (opcional)</li>
+        <li>Simulaciones virtuales de robots en el campo</li>
+        <li>Desarrollo de un proyecto final aplicado al agro</li>
+        <li>Foros y sesiones de preguntas en vivo</li>
+      </ul>
+    </section>
+    <section class="fade-in" id="inscripcion">
+      <h2>Formulario de Inscripción</h2>
+      <form class="contact-form" id="form-inscripcion">
+        <label for="nombre">Nombre y Apellido:</label>
+        <input type="text" id="nombre" name="nombre" required>
+        <label for="documento">Documento de Identidad:</label>
+        <input type="text" id="documento" name="documento" required>
+        <label for="telefono">Teléfono:</label>
+        <input type="tel" id="telefono" name="telefono" required>
+        <label for="email">Correo electrónico:</label>
+        <input type="email" id="email" name="email" required>
+        <button type="submit">Enviar inscripción</button>
+      </form>
+      <div id="inscripcion-exito" style="display:none; color:green; font-weight:bold; text-align:center; margin-top:1em;">
+        ¡Inscripción enviada con éxito!
+      </div>
+    </section>
+  </main>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      function revealOnScroll() {
+        document.querySelectorAll('.fade-in').forEach(function(el) {
+          const rect = el.getBoundingClientRect();
+          if (rect.top < window.innerHeight - 50) {
+            el.classList.add('visible');
+          }
+        });
+      }
+      window.addEventListener('scroll', revealOnScroll);
+      revealOnScroll();
+      function setRepeat(videoId) {
+        var vid = document.getElementById(videoId);
+        if (vid) {
+          vid.addEventListener('ended', function() {
+            setTimeout(function() {
+              vid.currentTime = 0;
+              vid.play();
+            }, 2000);
+          });
+        }
+      }
+      setRepeat('robotVideo');
+      setRepeat('simulacionVideo');
+      var form = document.getElementById('form-inscripcion');
+      var success = document.getElementById('inscripcion-exito');
+      if (form && success) {
+        form.addEventListener('submit', function(e) {
+          e.preventDefault();
+          form.style.display = 'none';
+          success.style.display = 'block';
+        });
+      }
+    });
+  </script>
+</body>
+</html>
